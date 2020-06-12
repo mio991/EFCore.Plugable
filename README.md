@@ -8,6 +8,6 @@ The goal of this Library is to add Plugin functionality to EntityFrameworkCore.
 
 - [x] semi-dynamic Model
 - [x] migrations
-- [] `dotnet-ef` Code Generation
+- [ ] `dotnet-ef` Code Generation
 
 And probably more...
