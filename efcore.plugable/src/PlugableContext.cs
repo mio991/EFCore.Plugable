@@ -40,7 +40,7 @@ namespace EFCore.Plugable
             collectServices(services);
 
             services.AddSingleton<IPluginRegistry>(new PluginRegistry(plugins));
-            services.AddScoped<IMigrationsAssembly, PlugableMigrationsAssembly>();
+            services.AddScoped<IMigrationsAssembly, PlugableMigrationsAssembly>(s => new PlugableMigrationsAssembly(s.GetRequiredService<IPluginRegistry>(), this.GetType()));
 
             optionsBuilder.UseInternalServiceProvider(services.BuildServiceProvider());
         }

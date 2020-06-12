@@ -431,3 +431,5 @@ $RECYCLE.BIN/
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+efcore.plugable.test/test/simple.plugin/migrations

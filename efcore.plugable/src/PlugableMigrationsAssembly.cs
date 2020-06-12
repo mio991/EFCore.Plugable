@@ -10,11 +10,15 @@ namespace EFCore.Plugable
     internal class PlugableMigrationsAssembly : IMigrationsAssembly
     {
         private readonly IEnumerable<TypeInfo> migrations;
+        private readonly Type contextType;
+        private ModelSnapshot modelSnapshot;
 
-        public PlugableMigrationsAssembly(IPluginRegistry registry)
+        public PlugableMigrationsAssembly(IPluginRegistry registry, Type contextType)
         {
             this.migrations = registry.GetRegisteredPlugins()
                     .SelectMany(plugin => plugin.CollectMigrations());
+
+            this.contextType = contextType;
         }
 
         public IReadOnlyDictionary<string, TypeInfo> Migrations
@@ -26,13 +30,26 @@ namespace EFCore.Plugable
             }
         }
 
-        public ModelSnapshot ModelSnapshot => throw new System.NotImplementedException();
+        public ModelSnapshot ModelSnapshot
+        {
+            get
+            {
+                return modelSnapshot
+                ??= (from t in Assembly.DefinedTypes.Where(
+                t => !t.IsAbstract
+                    && !t.IsGenericTypeDefinition)
+                     where t.IsSubclassOf(typeof(ModelSnapshot))
+                         && t.GetCustomAttribute<DbContextAttribute>()?.ContextType == contextType
+                     select (ModelSnapshot)Activator.CreateInstance(t.AsType()))
+                .FirstOrDefault();
+            }
+        }
 
         public Assembly Assembly
         {
             get
             {
-                return typeof(PlugableMigrationsAssembly).Assembly;
+                return contextType.Assembly;
             }
         }
 
@@ -43,10 +60,10 @@ namespace EFCore.Plugable
 
         public string FindMigrationId(string nameOrId)
         {
-            return migrations.Single(ti =>
+            return migrations.SingleOrDefault(ti =>
                 ti.GetCustomAttribute<MigrationAttribute>().Id == nameOrId
                 || ti.Name == nameOrId
-            ).GetCustomAttribute<MigrationAttribute>().Id;
+            )?.GetCustomAttribute<MigrationAttribute>().Id;
         }
     }
 }

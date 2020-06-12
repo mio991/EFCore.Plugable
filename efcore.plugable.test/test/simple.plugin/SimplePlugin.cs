@@ -12,10 +12,9 @@ namespace EFCore.Plugable.Test
     {
         public ICollection<TypeInfo> CollectMigrations()
         {
-            return new List<TypeInfo>
-            {
-                typeof(CreateSimplePluginDb).GetTypeInfo()
-            };
+            return Assembly.GetExecutingAssembly().DefinedTypes.Where(
+                t => t.IsSubclassOf(typeof(Migration))
+            ).ToList();
         }
 
         public void OnModelCreation(ModelBuilder modelBuilder)
@@ -104,52 +103,5 @@ namespace EFCore.Plugable.Test
 
         public List<IPluginConfig> Plugins { get; private set; }
         public DbContextOptions Options { get; private set; }
-    }
-
-    [Migration("CreateSimplePluginDb")]
-    class CreateSimplePluginDb : Migration
-    {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Article>(article =>
-            {
-                article.HasKey(a => a.Id);
-                article.HasMany(a => a.Comments)
-                    .WithOne(c => c.Article);
-            });
-
-            modelBuilder.Entity<Comment>().HasKey(c => c.Id);
-        }
-
-        protected override void Up([NotNullAttribute] MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.CreateTable(
-                "Article",
-                columns: table => new
-                {
-                    Id = table.Column<long>(nullable: false),
-                    Title = table.Column<string>(nullable: false),
-                    Text = table.Column<string>(nullable: false),
-                    PublishingDate = table.Column<DateTimeOffset>(nullable: false)
-                },
-                constraints: table => table.PrimaryKey("PK_ArticleId", a => a.Id)
-            );
-
-            migrationBuilder.CreateTable(
-                "Comment",
-                columns: table => new
-                {
-                    Id = table.Column<long>(nullable: false),
-                    ArticleId = table.Column<long>(nullable: false),
-                    Text = table.Column<string>(nullable: false),
-                    PublishingDate = table.Column<DateTimeOffset>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CommentId", c => c.Id);
-                    table.ForeignKey("FK_Comment_Article", c => c.ArticleId, "Articles", "Id");
-                }
-            );
-        }
     }
 }
