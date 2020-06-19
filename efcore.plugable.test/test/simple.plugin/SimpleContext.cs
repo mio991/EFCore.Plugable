@@ -11,10 +11,10 @@ namespace EFCore.Plugable.Test
     {
         public SimpleContext() : base(
             new List<IPluginConfig> { new SimplePlugin() },
+                services => services.AddEntityFrameworkSqlite(),
             new DbContextOptionsBuilder()
                 .UseSqlite("Data Source=test.db")
-                .Options,
-                services => services.AddEntityFrameworkSqlite()
+                .Options
             )
         { }
     }

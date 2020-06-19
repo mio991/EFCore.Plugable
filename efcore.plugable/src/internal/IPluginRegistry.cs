@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace EFCore.Plugable
 {
-    public interface IPluginRegistry
+    internal interface IPluginRegistry
     {
         void RegisterPlugin(IPluginConfig plugin);
         IEnumerable<IPluginConfig> GetRegisteredPlugins();

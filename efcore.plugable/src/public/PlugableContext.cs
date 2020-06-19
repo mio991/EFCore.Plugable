@@ -1,15 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-
-using Microsoft.EntityFrameworkCore.Diagnostics;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Utilities;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace EFCore.Plugable
@@ -19,12 +11,19 @@ namespace EFCore.Plugable
         private readonly ICollection<IPluginConfig> plugins;
         private readonly Action<IServiceCollection> collectServices;
 
-        public PlugableContext(ICollection<IPluginConfig> plugins, DbContextOptions options, Action<IServiceCollection> collectServices) : base(options)
+        public PlugableContext(ICollection<IPluginConfig> plugins, Action<IServiceCollection> collectServices, DbContextOptions options) : base(options)
         {
             this.plugins = plugins;
             this.collectServices = collectServices;
         }
 
+        /// <summary>
+        /// Creates the Model used by this <see cref="DbContext"/>.
+        /// 
+        /// 
+        /// If you override this make sure you call this in your <see cref="OnModelCreating"/> Methode.
+        /// </summary>
+        /// <param name="modelBuilder">The <see cref="ModelBuilder"/> used to build the Model.</param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             foreach (IPluginConfig plugin in plugins)
@@ -33,6 +32,9 @@ namespace EFCore.Plugable
             }
         }
 
+        /// <summary>
+        /// Configures the DbContext and adds Plugin related features
+        /// </summary>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             IServiceCollection services = new ServiceCollection();

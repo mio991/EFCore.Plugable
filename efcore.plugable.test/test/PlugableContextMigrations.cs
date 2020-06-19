@@ -22,8 +22,8 @@ namespace EFCore.Plugable.Test
 
             var db = new PlugableContext(
                 Fixture.Plugins,
-                new DbContextOptionsBuilder().UseSqlite($"Data Source={testDb}").Options,
-                services => services.AddEntityFrameworkSqlite()
+                services => services.AddEntityFrameworkSqlite(),
+                new DbContextOptionsBuilder().UseSqlite($"Data Source={testDb}").Options
             );
 
             await db.Database.MigrateAsync();

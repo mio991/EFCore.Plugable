@@ -19,8 +19,8 @@ namespace EFCore.Plugable.Test
         [Fact]
         public void ModelContainsArticlsAndComments()
         {
-            var db = new PlugableContext(SimplePluginFixture.Plugins, SimplePluginFixture.Options,
-                services => services.AddEntityFrameworkInMemoryDatabase());
+            var db = new PlugableContext(SimplePluginFixture.Plugins,
+                services => services.AddEntityFrameworkInMemoryDatabase(), SimplePluginFixture.Options);
 
             Assert.Collection(db.Model.GetEntityTypes(),
                 article => Assert.Contains(nameof(Article), article.Name),
@@ -31,8 +31,8 @@ namespace EFCore.Plugable.Test
         [Fact]
         public async Task CanAddArticle()
         {
-            var db = new PlugableContext(SimplePluginFixture.Plugins, SimplePluginFixture.Options,
-                services => services.AddEntityFrameworkInMemoryDatabase());
+            var db = new PlugableContext(SimplePluginFixture.Plugins,
+                services => services.AddEntityFrameworkInMemoryDatabase(), SimplePluginFixture.Options);
 
             var countBefore = await db.Articles().CountAsync();
 
