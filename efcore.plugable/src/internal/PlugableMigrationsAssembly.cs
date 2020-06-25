@@ -16,7 +16,12 @@ namespace EFCore.Plugable
         public PlugableMigrationsAssembly(IPluginRegistry registry, Type contextType)
         {
             this.migrations = registry.GetRegisteredPlugins()
-                    .SelectMany(plugin => plugin.CollectMigrations());
+                    .SelectMany(plugin =>
+                    {
+                        return plugin.GetType().Assembly.GetExportedTypes()
+                            .Where(t => t.GetCustomAttribute<MigrationAttribute>() != null)
+                            .Select(t => t.GetTypeInfo());
+                    });
 
             this.contextType = contextType;
         }

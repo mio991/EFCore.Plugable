@@ -1,11 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30128.36
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "efcore.plugable", "efcore.plugable\efcore.plugable.csproj", "{00B75719-93F6-4568-B07D-BEA325A36F83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "efcore.plugable", "efcore.plugable\efcore.plugable.csproj", "{00B75719-93F6-4568-B07D-BEA325A36F83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "efcore.plugable.test", "efcore.plugable.test\efcore.plugable.test.csproj", "{75D191C1-96B4-4503-94B9-74FA7B2C6642}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "efcore.plugable.test", "efcore.plugable.test\efcore.plugable.test.csproj", "{75D191C1-96B4-4503-94B9-74FA7B2C6642}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasePlugin", "BasePlugin\BasePlugin.csproj", "{EC2132C0-8DC7-40DB-AD75-9FBC857018FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DerivedPlugin", "DerivedPlugin\DerivedPlugin.csproj", "{E5073F1D-443B-444D-B5BD-391FBAC915BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{00B75719-93F6-4568-B07D-BEA325A36F83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -44,5 +45,35 @@ Global
 		{75D191C1-96B4-4503-94B9-74FA7B2C6642}.Release|x64.Build.0 = Release|Any CPU
 		{75D191C1-96B4-4503-94B9-74FA7B2C6642}.Release|x86.ActiveCfg = Release|Any CPU
 		{75D191C1-96B4-4503-94B9-74FA7B2C6642}.Release|x86.Build.0 = Release|Any CPU
+		{EC2132C0-8DC7-40DB-AD75-9FBC857018FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC2132C0-8DC7-40DB-AD75-9FBC857018FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC2132C0-8DC7-40DB-AD75-9FBC857018FB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{EC2132C0-8DC7-40DB-AD75-9FBC857018FB}.Debug|x64.Build.0 = Debug|Any CPU
+		{EC2132C0-8DC7-40DB-AD75-9FBC857018FB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EC2132C0-8DC7-40DB-AD75-9FBC857018FB}.Debug|x86.Build.0 = Debug|Any CPU
+		{EC2132C0-8DC7-40DB-AD75-9FBC857018FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC2132C0-8DC7-40DB-AD75-9FBC857018FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC2132C0-8DC7-40DB-AD75-9FBC857018FB}.Release|x64.ActiveCfg = Release|Any CPU
+		{EC2132C0-8DC7-40DB-AD75-9FBC857018FB}.Release|x64.Build.0 = Release|Any CPU
+		{EC2132C0-8DC7-40DB-AD75-9FBC857018FB}.Release|x86.ActiveCfg = Release|Any CPU
+		{EC2132C0-8DC7-40DB-AD75-9FBC857018FB}.Release|x86.Build.0 = Release|Any CPU
+		{E5073F1D-443B-444D-B5BD-391FBAC915BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5073F1D-443B-444D-B5BD-391FBAC915BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5073F1D-443B-444D-B5BD-391FBAC915BA}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E5073F1D-443B-444D-B5BD-391FBAC915BA}.Debug|x64.Build.0 = Debug|Any CPU
+		{E5073F1D-443B-444D-B5BD-391FBAC915BA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E5073F1D-443B-444D-B5BD-391FBAC915BA}.Debug|x86.Build.0 = Debug|Any CPU
+		{E5073F1D-443B-444D-B5BD-391FBAC915BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5073F1D-443B-444D-B5BD-391FBAC915BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5073F1D-443B-444D-B5BD-391FBAC915BA}.Release|x64.ActiveCfg = Release|Any CPU
+		{E5073F1D-443B-444D-B5BD-391FBAC915BA}.Release|x64.Build.0 = Release|Any CPU
+		{E5073F1D-443B-444D-B5BD-391FBAC915BA}.Release|x86.ActiveCfg = Release|Any CPU
+		{E5073F1D-443B-444D-B5BD-391FBAC915BA}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B7CD6F53-0D06-4975-9EC4-7AB23A1663AD}
 	EndGlobalSection
 EndGlobal

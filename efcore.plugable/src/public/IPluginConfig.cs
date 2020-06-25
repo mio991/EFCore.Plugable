@@ -15,11 +15,5 @@ namespace EFCore.Plugable
         /// </summary>
         /// <param name="modelBuilder">The <see cref="ModelBuilder"/> from <see cref="Microsoft.EntityFrameworkCore.DbContext.OnModelCreating(ModelBuilder)"/></param>
         void OnModelCreation(ModelBuilder modelBuilder);
-
-        /// <summary>
-        /// Collect the Types for the Migrations specific to your Plugin
-        /// </summary>
-        /// <returns>A Collection of Migrations specific to your Plugin</returns>
-        ICollection<TypeInfo> CollectMigrations();
     }
 }

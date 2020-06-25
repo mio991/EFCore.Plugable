@@ -5,6 +5,13 @@
     <DefaultNamespace>EFCore.Plugable</DefaultNamespace>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <PackageId>EFCore.Plugable</PackageId>
+    <Version>0.0.1</Version>
+    <Authors>mio991</Authors>
+  </PropertyGroup>
+
+
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.5" />
